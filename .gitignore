@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*venv
+.env
+alembic/
+alembic*
+db_creation.py
+testing_*
+create_*
+.env
+.env.*
