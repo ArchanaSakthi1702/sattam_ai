@@ -3,6 +3,7 @@ from fastapi import HTTPException
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
+import time
 
 from uuid import UUID
 
@@ -290,7 +291,7 @@ class SubscriptionService:
                 {
                     "amount": amount_paise,
                     "currency": "INR",
-                    "receipt": f"user_{user.id}_plan_{plan.id}",
+                    "receipt": f"sub_{user.id.hex[:6]}_{int(time.time())}",
                     "notes": {
                         "user_id": str(user.id),
                         "plan_id": str(plan.id),
