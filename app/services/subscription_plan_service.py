@@ -321,7 +321,7 @@ class SubscriptionService:
             )
 
         return {
-            "key": settings.RAZORPAY_KEY_ID,
+            "key": settings.RAZOR_PAY_API_KEY,
             "order_id": order["id"],
             "amount": order["amount"],
             "currency": order["currency"],
