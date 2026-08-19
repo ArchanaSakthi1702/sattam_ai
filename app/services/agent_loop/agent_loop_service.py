@@ -366,13 +366,17 @@ class AgentLoopService:
                 if tool_result.get("status") == "needs_input":
 
                     yield {
-                        "type": "needs_input",
+                        "type": "final",
+                        "status": "needs_input",
                         "tool_name": tool_call.name,
                         "answer": tool_result.get("message"),
                         "data": tool_result.get(
                             "data",
                             {},
                         ),
+                        "input_tokens": input_tokens,
+                        "output_tokens": output_tokens,
+                        "total_tokens": total_tokens,
                     }
 
                     return
