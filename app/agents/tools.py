@@ -87,3 +87,25 @@ TOOLS = [
         },
     }
 ]
+
+TOOL_MESSAGES = {
+    "search_legal_news": {
+        "running": "Searching the latest legal news...",
+        "completed": "Finished searching legal news.",
+    },
+
+    "get_user_profile": {
+        "running": "Checking your profile...",
+        "completed": "Finished checking your profile.",
+    },
+
+    "get_current_time": {
+        "running": "Checking the current time...",
+        "completed": "Got the current time.",
+    },
+
+    "generate_document": {
+        "running": "Generating your document...",
+        "completed": "Your document has been generated.",
+    },
+}

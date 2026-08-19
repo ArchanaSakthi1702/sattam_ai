@@ -6,6 +6,10 @@ from fastapi import (
     File,
     BackgroundTasks
 )
+
+from fastapi.responses import StreamingResponse
+import json
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime
 from uuid import UUID
@@ -179,3 +183,27 @@ async def delete_session(
             status_code=404,
             detail=str(e),
         )
+
+
+@router.post("/stream")
+async def stream_message(
+    request: ChatRequest,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+
+    async def event_generator():
+
+        async for event in ChatService.send_message_stream(
+            db=db,
+            user=user,
+            message=request.message,
+            session_id=request.session_id,
+            file_ids=request.file_ids,
+        ):
+            yield f"data: {json.dumps(event, default=str)}\n\n"
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+    )

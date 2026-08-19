@@ -8,7 +8,6 @@ from app.services.document_service import (
 )
 from app.services.legal_news_service import LegalNewsService
 from app.services.user_profile_service import UserProfileService
-
 logger = logging.getLogger(__name__)
 
 

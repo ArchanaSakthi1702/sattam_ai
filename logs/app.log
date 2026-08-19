@@ -4658,3 +4658,553 @@ Response headers:
 2026-08-17 14:47:25,222 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:79 | Detected 0 tool call(s) session_id=8cd2b77f-635c-4d5c-bce5-0d111ababd54
 2026-08-17 14:47:25,223 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:91 | Agent produced final answer session_id=8cd2b77f-635c-4d5c-bce5-0d111ababd54 iteration=2
 2026-08-17 14:47:37,972 | INFO | app.services.chat_service | chat_service.py:247 | send_message completed successfully session_id=8cd2b77f-635c-4d5c-bce5-0d111ababd54 user_id=d9612a62-d7a7-4ae6-a5f3-c33bdf001f3c
+2026-08-18 17:14:44,090 | INFO | app.services.auth_service | auth_service.py:218 | Login attempt | email=sakthieditz99@gmail.com
+2026-08-18 17:14:55,755 | WARNING | app.services.auth_service | auth_service.py:241 | Login failed: Google account used password login | user_id=5ccd46c8-5b51-40bd-9bfe-5ef2d0948e43
+2026-08-18 17:18:02,449 | INFO | app.services.auth_service | auth_service.py:218 | Login attempt | email=sakthieditz99@gmail.com
+2026-08-18 17:18:03,206 | WARNING | app.services.auth_service | auth_service.py:231 | Login failed: user not found | email=sakthieditz99@gmail.com
+2026-08-18 17:29:13,482 | INFO | app.services.auth_service | auth_service.py:218 | Login attempt | email=sakthieditz99@gmail.com
+2026-08-18 17:29:21,702 | INFO | app.services.auth_service | auth_service.py:279 | Login successful | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 17:29:21,743 | INFO | app.services.auth_service | auth_service.py:298 | JWT tokens generated | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 17:30:01,501 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 17:30:01,503 | INFO | app.services.chat_service | chat_service.py:75 | Creating new chat session for user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 17:30:02,403 | INFO | app.services.chat_service | chat_service.py:88 | New chat session created session_id=74af1343-94cd-499a-ae7d-441011c99c67
+2026-08-18 17:30:06,253 | INFO | app.services.chat_service | chat_service.py:139 | User message persisted session_id=74af1343-94cd-499a-ae7d-441011c99c67
+2026-08-18 17:30:09,110 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=74af1343-94cd-499a-ae7d-441011c99c67 (messages=1, tokens=2)
+2026-08-18 17:30:09,111 | INFO | app.services.chat_service | chat_service.py:165 | Building RAG context session_id=74af1343-94cd-499a-ae7d-441011c99c67 file_count=0
+2026-08-18 17:30:09,112 | INFO | app.services.chat_service | chat_service.py:185 | Sending request to AI provider session_id=74af1343-94cd-499a-ae7d-441011c99c67
+2026-08-18 17:30:09,113 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:25 | Agent loop started session_id=74af1343-94cd-499a-ae7d-441011c99c67
+2026-08-18 17:30:09,113 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:36 | ===== AGENT CONVERSATION =====
+2026-08-18 17:30:09,114 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:39 | [0] role='user' content='hey hi'
+2026-08-18 17:30:09,115 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:46 | [
+  {
+    "role": "user",
+    "content": "hey hi"
+  }
+]
+2026-08-18 17:30:11,351 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-18 17:30:12,758 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': 'b7dfdc22-4098-4fc9-9bcc-d0e65e9c6d00'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Tue, 18 Aug 2026 12:00:12 GMT'
+    'Content-Length': '1743'
+2026-08-18 17:30:12,759 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-18 17:30:20,449 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:30:21,149 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:67 | Agent iteration=1 session_id=74af1343-94cd-499a-ae7d-441011c99c67
+2026-08-18 17:30:21,150 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:80 | Detected 0 tool call(s) session_id=74af1343-94cd-499a-ae7d-441011c99c67
+2026-08-18 17:30:21,150 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:92 | Agent produced final answer session_id=74af1343-94cd-499a-ae7d-441011c99c67 iteration=1
+2026-08-18 17:30:21,557 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 400 Bad Request"
+2026-08-18 17:30:21,560 | ERROR | app.services.chat_service | chat_service.py:289 | Unexpected error in send_message for user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m197[0m, in [35msend_message[0m
+    formatted_response = [1;31mawait ResponseFormatter.format([0m
+                         [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    ...<4 lines>...
+    [1;31m)[0m
+    [1;31m^[0m
+  File [35m"F:\sattam_ai\SattamAI\app\services\response_formatter.py"[0m, line [35m62[0m, in [35mformat[0m
+    response = [1;31mawait client.responses.create([0m
+               [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    ...<19 lines>...
+    [1;31m)[0m
+    [1;31m^[0m
+  File [35m"F:\sattam_ai\SattamAI\sattam_ai_venv\Lib\site-packages\openai\resources\responses\responses.py"[0m, line [35m2701[0m, in [35mcreate[0m
+    return [1;31mawait self._post([0m
+           [1;31m^^^^^^^^^^^^^^^^^[0m
+    ...<48 lines>...
+    [1;31m)[0m
+    [1;31m^[0m
+  File [35m"F:\sattam_ai\SattamAI\sattam_ai_venv\Lib\site-packages\openai\_base_client.py"[0m, line [35m1931[0m, in [35mpost[0m
+    return [1;31mawait self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)[0m
+           [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"F:\sattam_ai\SattamAI\sattam_ai_venv\Lib\site-packages\openai\_base_client.py"[0m, line [35m1716[0m, in [35mrequest[0m
+    raise self._make_status_error_from_response(err.response) from None
+[1;35mopenai.BadRequestError[0m: [35mError code: 400 - {'error': {'message': "Invalid value: ''. Supported values are: 'additional_tools', 'agent_message', 'apply_patch_call', 'apply_patch_call_output', 'code_interpreter_call', 'compaction', 'compaction_trigger', 'computer_call', 'computer_call_output', 'custom_tool_call', 'custom_tool_call_output', 'file_search_call', 'function_call', 'function_call_output', 'image_generation_call', 'item_reference', 'local_shell_call', 'local_shell_call_output', 'mcp_approval_request', 'mcp_approval_response', 'mcp_call', 'mcp_list_tools', 'message', 'multi_agent_call', 'multi_agent_call_output', 'program', 'program_output', 'reasoning', 'shell_call', 'shell_call_output', 'tool_search_call', 'tool_search_output', and 'web_search_call'.", 'type': 'invalid_request_error', 'param': 'input[1]', 'code': 'invalid_value'}}[0m
+2026-08-18 17:34:59,280 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 17:34:59,281 | INFO | app.services.chat_service | chat_service.py:75 | Creating new chat session for user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 17:34:59,913 | INFO | app.services.chat_service | chat_service.py:88 | New chat session created session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a
+2026-08-18 17:35:02,896 | INFO | app.services.chat_service | chat_service.py:139 | User message persisted session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a
+2026-08-18 17:35:05,509 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a (messages=1, tokens=2)
+2026-08-18 17:35:05,510 | INFO | app.services.chat_service | chat_service.py:165 | Building RAG context session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a file_count=0
+2026-08-18 17:35:05,510 | INFO | app.services.chat_service | chat_service.py:185 | Sending request to AI provider session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a
+2026-08-18 17:35:05,510 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:25 | Agent loop started session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a
+2026-08-18 17:35:05,511 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:36 | ===== AGENT CONVERSATION =====
+2026-08-18 17:35:05,511 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:39 | [0] role='user' content='hey hi'
+2026-08-18 17:35:05,511 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:46 | [
+  {
+    "role": "user",
+    "content": "hey hi"
+  }
+]
+2026-08-18 17:35:07,301 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-18 17:35:08,738 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': 'fe57823f-06b6-49ae-ad40-b894240c9700'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Tue, 18 Aug 2026 12:05:08 GMT'
+    'Content-Length': '1743'
+2026-08-18 17:35:08,740 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-18 17:35:13,625 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:35:14,501 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:67 | Agent iteration=1 session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a
+2026-08-18 17:35:14,501 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:80 | Detected 0 tool call(s) session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a
+2026-08-18 17:35:14,502 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:92 | Agent produced final answer session_id=b7aa59a4-e755-48cf-b011-a17cdecfd02a iteration=1
+2026-08-18 17:35:14,503 | ERROR | app.services.chat_service | chat_service.py:293 | Unexpected error in send_message for user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m197[0m, in [35msend_message[0m
+    formatted_response = await [31mResponseFormatter.format[0m[1;31m([0m
+                               [31m~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^[0m
+        [1;31manswer=agent_result["answer"],[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    ...<2 lines>...
+        [1;31mevents=agent_result.get("events", []),[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1;31m)[0m
+    [1;31m^[0m
+[1;35mTypeError[0m: [35mResponseFormatter.format() got an unexpected keyword argument 'events'[0m
+2026-08-18 17:36:30,826 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 17:36:30,834 | INFO | app.services.chat_service | chat_service.py:75 | Creating new chat session for user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 17:36:32,281 | INFO | app.services.chat_service | chat_service.py:88 | New chat session created session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5
+2026-08-18 17:36:36,067 | INFO | app.services.chat_service | chat_service.py:139 | User message persisted session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5
+2026-08-18 17:36:38,968 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5 (messages=1, tokens=2)
+2026-08-18 17:36:38,969 | INFO | app.services.chat_service | chat_service.py:165 | Building RAG context session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5 file_count=0
+2026-08-18 17:36:38,970 | INFO | app.services.chat_service | chat_service.py:185 | Sending request to AI provider session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5
+2026-08-18 17:36:38,971 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:25 | Agent loop started session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5
+2026-08-18 17:36:38,971 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:36 | ===== AGENT CONVERSATION =====
+2026-08-18 17:36:38,971 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:39 | [0] role='user' content='hey hi'
+2026-08-18 17:36:38,972 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:46 | [
+  {
+    "role": "user",
+    "content": "hey hi"
+  }
+]
+2026-08-18 17:36:40,749 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-18 17:36:41,997 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': '95b01711-d6e9-41d3-9cf1-d71b21141a00'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Tue, 18 Aug 2026 12:06:40 GMT'
+    'Content-Length': '1737'
+2026-08-18 17:36:41,999 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-18 17:36:48,613 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:36:49,298 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:67 | Agent iteration=1 session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5
+2026-08-18 17:36:49,299 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:80 | Detected 0 tool call(s) session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5
+2026-08-18 17:36:49,299 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:92 | Agent produced final answer session_id=68998d15-e1ee-4f3b-909d-a4c345ad8dd5 iteration=1
+2026-08-18 17:36:49,300 | ERROR | app.services.chat_service | chat_service.py:292 | Unexpected error in send_message for user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m197[0m, in [35msend_message[0m
+    formatted_response = await [31mResponseFormatter.format[0m[1;31m([0m
+                               [31m~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^[0m
+        [1;31manswer=agent_result["answer"],[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    ...<2 lines>...
+        [1;31mevents=agent_result.get("events", []),[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1;31m)[0m
+    [1;31m^[0m
+[1;35mTypeError[0m: [35mResponseFormatter.format() got an unexpected keyword argument 'events'[0m
+2026-08-18 17:37:33,634 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 17:37:33,635 | INFO | app.services.chat_service | chat_service.py:75 | Creating new chat session for user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 17:37:34,532 | INFO | app.services.chat_service | chat_service.py:88 | New chat session created session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:37:38,552 | INFO | app.services.chat_service | chat_service.py:139 | User message persisted session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:37:41,349 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b (messages=1, tokens=2)
+2026-08-18 17:37:41,350 | INFO | app.services.chat_service | chat_service.py:165 | Building RAG context session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b file_count=0
+2026-08-18 17:37:41,351 | INFO | app.services.chat_service | chat_service.py:185 | Sending request to AI provider session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:37:41,351 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:25 | Agent loop started session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:37:41,351 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:36 | ===== AGENT CONVERSATION =====
+2026-08-18 17:37:41,352 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:39 | [0] role='user' content='hey hi'
+2026-08-18 17:37:41,352 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:46 | [
+  {
+    "role": "user",
+    "content": "hey hi"
+  }
+]
+2026-08-18 17:37:43,777 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-18 17:37:44,402 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': '41b8900a-4fb7-4466-b0b9-2b65adfa6c00'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Tue, 18 Aug 2026 12:07:43 GMT'
+    'Content-Length': '1743'
+2026-08-18 17:37:44,405 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-18 17:37:49,667 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:37:49,883 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:67 | Agent iteration=1 session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:37:49,884 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:80 | Detected 0 tool call(s) session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:37:49,884 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:92 | Agent produced final answer session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b iteration=1
+2026-08-18 17:37:56,380 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:38:00,747 | INFO | app.services.chat_service | chat_service.py:253 | send_message completed successfully session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 17:39:05,409 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:07,752 | INFO | app.services.chat_service | chat_service.py:139 | User message persisted session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:09,193 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b (messages=3, tokens=563)
+2026-08-18 17:39:09,195 | INFO | app.services.chat_service | chat_service.py:165 | Building RAG context session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b file_count=0
+2026-08-18 17:39:09,195 | INFO | app.services.chat_service | chat_service.py:185 | Sending request to AI provider session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:09,196 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:25 | Agent loop started session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:09,197 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:36 | ===== AGENT CONVERSATION =====
+2026-08-18 17:39:09,198 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:39 | [0] role='user' content='hey hi'
+2026-08-18 17:39:09,199 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:39 | [1] role='assistant' content='Hi there! Nice to meet you. How can I help today?\n\nYou can choose from:\n- Draft a legal document (e.g., NDA, rental agreement, employment contract, sale deed, legal notice). If you want, tell me the document type and key details (parties, dates, terms).\n- Look up latest legal news (tell me the topic'
+2026-08-18 17:39:09,200 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:39 | [2] role='user' content='can you generate a rental agreement for me'
+2026-08-18 17:39:09,202 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:46 | [
+  {
+    "role": "user",
+    "content": "hey hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Hi there! Nice to meet you. How can I help today?\n\nYou can choose from:\n- Draft a legal document (e.g., NDA, rental agreement, employment contract, sale deed, legal notice). If you want, tell me the document type and key details (parties, dates, terms).\n- Look up latest legal news (tell me the topic or keywords).\n- Check the current date/time.\n\nIf you\u2019d like, I can get the ball rolling with a quick outline for a document you have in mind\u2014just tell me the type and any essential details."
+  },
+  {
+    "role": "user",
+    "content": "can you generate a rental agreement for me"
+  }
+]
+2026-08-18 17:39:14,800 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:39:14,846 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:67 | Agent iteration=1 session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:14,846 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:80 | Detected 1 tool call(s) session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:14,847 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:113 | Tool requested: generate_document session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:14,848 | INFO | app.agents.tool_executor | tool_executor.py:27 | Executing tool=generate_document session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:39:14,848 | ERROR | app.services.chat_service | chat_service.py:291 | Unexpected error in send_message for user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m190[0m, in [35msend_message[0m
+    agent_result = [1;31mawait AgentLoopService.run([0m
+                   [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    ...<4 lines>...
+    [1;31m)[0m
+    [1;31m^[0m
+  File [35m"F:\sattam_ai\SattamAI\app\services\agent_loop\agent_loop_service.py"[0m, line [35m151[0m, in [35mrun[0m
+    [1;31mtool_data.update[0m(
+    [1;31m^^^^^^^^^^^^^^^^[0m
+[1;35mAttributeError[0m: [35m'list' object has no attribute 'update'[0m
+2026-08-18 17:41:49,953 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:41:54,219 | INFO | app.services.chat_service | chat_service.py:139 | User message persisted session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:41:57,469 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b (messages=4, tokens=571)
+2026-08-18 17:41:57,470 | INFO | app.services.chat_service | chat_service.py:165 | Building RAG context session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b file_count=0
+2026-08-18 17:41:57,471 | INFO | app.services.chat_service | chat_service.py:185 | Sending request to AI provider session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:41:57,471 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:25 | Agent loop started session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:41:57,472 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:35 | ===== AGENT CONVERSATION =====
+2026-08-18 17:41:57,472 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [0] role='user' content='hey hi'
+2026-08-18 17:41:57,473 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [1] role='assistant' content='Hi there! Nice to meet you. How can I help today?\n\nYou can choose from:\n- Draft a legal document (e.g., NDA, rental agreement, employment contract, sale deed, legal notice). If you want, tell me the document type and key details (parties, dates, terms).\n- Look up latest legal news (tell me the topic'
+2026-08-18 17:41:57,474 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [2] role='user' content='can you generate a rental agreement for me'
+2026-08-18 17:41:57,474 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [3] role='user' content='can you generate a rental agreement for me'
+2026-08-18 17:41:57,475 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:45 | [
+  {
+    "role": "user",
+    "content": "hey hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Hi there! Nice to meet you. How can I help today?\n\nYou can choose from:\n- Draft a legal document (e.g., NDA, rental agreement, employment contract, sale deed, legal notice). If you want, tell me the document type and key details (parties, dates, terms).\n- Look up latest legal news (tell me the topic or keywords).\n- Check the current date/time.\n\nIf you\u2019d like, I can get the ball rolling with a quick outline for a document you have in mind\u2014just tell me the type and any essential details."
+  },
+  {
+    "role": "user",
+    "content": "can you generate a rental agreement for me"
+  },
+  {
+    "role": "user",
+    "content": "can you generate a rental agreement for me"
+  }
+]
+2026-08-18 17:41:59,254 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-18 17:41:59,797 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': '263396f1-146d-454b-b8ae-679e8b211800'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Tue, 18 Aug 2026 12:11:59 GMT'
+    'Content-Length': '1739'
+2026-08-18 17:41:59,799 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-18 17:42:16,750 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:42:17,003 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:66 | Agent iteration=1 session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:42:17,003 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:79 | Detected 1 tool call(s) session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:42:17,003 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:112 | Tool requested: generate_document session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:42:17,004 | INFO | app.agents.tool_executor | tool_executor.py:27 | Executing tool=generate_document session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b
+2026-08-18 17:42:17,004 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:155 | Tool result: {'status': 'needs_input', 'message': 'I can generate the rental agreement once I have the following information:\n\n- Landlord Name\n- Tenant Name\n- Property Address\n- Rent Amount', 'data': {'document_type': 'rental_agreement', 'missing_fields': ['landlord_name', 'tenant_name', 'property_address', 'rent_amount']}}
+2026-08-18 17:42:22,826 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 17:42:23,685 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=4528, limit=2000) as a result of completing an in-flight request.
+2026-08-18 17:42:25,465 | INFO | app.services.chat_service | chat_service.py:253 | send_message completed successfully session_id=c63d0b7b-c315-4240-a572-3188e5e90f2b user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 18:24:45,714 | ERROR | asyncio | base_events.py:1871 | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001FBFBA08440>
+2026-08-18 18:24:45,721 | ERROR | asyncio | base_events.py:1871 | Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x000001FBFB9B10F0>, 169293.5329313)])']
+connector: <aiohttp.connector.TCPConnector object at 0x000001FBFBA08590>
+2026-08-18 18:35:22,226 | INFO | app.services.auth_service | auth_service.py:218 | Login attempt | email=sakthieditz99@gmail.com
+2026-08-18 18:35:29,293 | INFO | app.services.auth_service | auth_service.py:279 | Login successful | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 18:35:29,330 | INFO | app.services.auth_service | auth_service.py:298 | JWT tokens generated | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 18:39:08,143 | INFO | app.services.chat_service | chat_service.py:464 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 18:39:10,310 | ERROR | app.services.chat_service | chat_service.py:749 | Unexpected error in send_message_stream user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m521[0m, in [35msend_message_stream[0m
+    await SubscriptionGuardService.validate_usage_limits(
+    ...<2 lines>...
+    )
+  File [35m"F:\sattam_ai\SattamAI\app\services\subscription_guard_service.py"[0m, line [35m111[0m, in [35mvalidate_usage_limits[0m
+    raise ValueError(
+        "Daily token limit exceeded"
+    )
+[1;35mValueError[0m: [35mDaily token limit exceeded[0m
+2026-08-18 18:42:11,187 | INFO | app.services.chat_service | chat_service.py:464 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 18:42:12,307 | ERROR | app.services.chat_service | chat_service.py:749 | Unexpected error in send_message_stream user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m521[0m, in [35msend_message_stream[0m
+    await SubscriptionGuardService.validate_usage_limits(
+    ...<2 lines>...
+    )
+  File [35m"F:\sattam_ai\SattamAI\app\services\subscription_guard_service.py"[0m, line [35m111[0m, in [35mvalidate_usage_limits[0m
+    raise ValueError(
+        "Daily token limit exceeded"
+    )
+[1;35mValueError[0m: [35mDaily token limit exceeded[0m
+2026-08-18 18:42:48,096 | INFO | app.services.chat_service | chat_service.py:464 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 18:42:52,794 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=bb8d4ecd-e026-458f-8a65-593a9387506f (messages=1, tokens=2)
+2026-08-18 18:42:52,794 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=bb8d4ecd-e026-458f-8a65-593a9387506f
+2026-08-18 18:42:54,742 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-18 18:42:55,199 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': 'ca203ae6-1421-4350-b0b8-a5356ab17100'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Tue, 18 Aug 2026 13:12:54 GMT'
+    'Content-Length': '1744'
+2026-08-18 18:42:55,202 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-18 18:43:00,040 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:43:00,364 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:267 | Agent streaming iteration=1 session_id=bb8d4ecd-e026-458f-8a65-593a9387506f
+2026-08-18 18:43:06,629 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:43:09,274 | INFO | app.services.chat_service | chat_service.py:715 | send_message_stream completed session_id=bb8d4ecd-e026-458f-8a65-593a9387506f user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 18:45:06,564 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 18:45:11,992 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 (messages=1, tokens=2)
+2026-08-18 18:45:11,993 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:45:13,471 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-18 18:45:13,890 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': '6e645351-93c5-4a82-8bf2-a456ac366a00'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Tue, 18 Aug 2026 13:15:13 GMT'
+    'Content-Length': '1749'
+2026-08-18 18:45:13,891 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-18 18:45:18,507 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:45:18,750 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:267 | Agent streaming iteration=1 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:45:22,077 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:45:24,689 | INFO | app.services.chat_service | chat_service.py:716 | send_message_stream completed session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 18:46:19,929 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:23,469 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 (messages=3, tokens=543)
+2026-08-18 18:46:23,470 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:28,124 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:46:28,166 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:267 | Agent streaming iteration=1 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:28,167 | INFO | app.agents.tool_executor | tool_executor.py:26 | Executing tool=search_legal_news session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:28,167 | INFO | app.services.legal_news_service | legal_news_service.py:27 | Searching legal news query=cyberbullying session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:28,961 | INFO | httpx | _client.py:1740 | HTTP Request: GET https://newsapi.org/v2/everything?q=cyberbullying&language=en&sortBy=publishedAt&pageSize=10&apiKey=8ae81cdbd4434e5ab8cfc93e4453be80 "HTTP/1.1 200 OK"
+2026-08-18 18:46:28,962 | INFO | app.services.legal_news_service | legal_news_service.py:73 | Found 9 articles for query=cyberbullying
+2026-08-18 18:46:32,403 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:46:32,485 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:267 | Agent streaming iteration=2 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:32,502 | INFO | app.agents.tool_executor | tool_executor.py:26 | Executing tool=search_legal_news session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:32,503 | INFO | app.services.legal_news_service | legal_news_service.py:27 | Searching legal news query=cyberbullying session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:33,487 | INFO | httpx | _client.py:1740 | HTTP Request: GET https://newsapi.org/v2/everything?q=cyberbullying&language=en&sortBy=publishedAt&pageSize=10&apiKey=8ae81cdbd4434e5ab8cfc93e4453be80 "HTTP/1.1 200 OK"
+2026-08-18 18:46:33,490 | INFO | app.services.legal_news_service | legal_news_service.py:73 | Found 9 articles for query=cyberbullying
+2026-08-18 18:46:42,608 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:46:42,645 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:267 | Agent streaming iteration=3 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:46:53,755 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:46:54,716 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=9124, limit=2000) as a result of completing an in-flight request.
+2026-08-18 18:46:55,995 | INFO | app.services.chat_service | chat_service.py:716 | send_message_stream completed session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 18:51:01,122 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:02,239 | ERROR | app.services.chat_service | chat_service.py:292 | Unexpected error in send_message for user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m123[0m, in [35msend_message[0m
+    await SubscriptionGuardService.validate_usage_limits(
+    ...<2 lines>...
+    )
+  File [35m"F:\sattam_ai\SattamAI\app\services\subscription_guard_service.py"[0m, line [35m111[0m, in [35mvalidate_usage_limits[0m
+    raise ValueError(
+        "Daily token limit exceeded"
+    )
+[1;35mValueError[0m: [35mDaily token limit exceeded[0m
+2026-08-18 18:51:28,457 | INFO | app.services.chat_service | chat_service.py:50 | send_message started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:30,130 | INFO | app.services.chat_service | chat_service.py:139 | User message persisted session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:31,476 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 (messages=5, tokens=2597)
+2026-08-18 18:51:31,476 | INFO | app.services.chat_service | chat_service.py:165 | Building RAG context session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 file_count=0
+2026-08-18 18:51:31,477 | INFO | app.services.chat_service | chat_service.py:185 | Sending request to AI provider session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:31,479 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:25 | Agent loop started session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:31,480 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:35 | ===== AGENT CONVERSATION =====
+2026-08-18 18:51:31,480 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [0] role='user' content='hey hi'
+2026-08-18 18:51:31,481 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [1] role='assistant' content='Hi there! How can I help today? I can:\n- Generate a document (NDA, employment agreement, rental agreement, etc.) — just tell me the type and key details.\n- Look up the latest legal news on a topic.\n- Explain a legal concept or answer questions.\n- Review or draft contract terms.\n\nWhat are you working'
+2026-08-18 18:51:31,482 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [2] role='user' content='can you get latest cyber bullying news '
+2026-08-18 18:51:31,482 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [3] role='assistant' content='Here are some of the latest cyberbullying–related news items I found:\n\n- Parents take on Meta, TikTok, Google, and Snap in 3,000 youth safety lawsuits\n  - Source: Malwarebytes\n  - Date: Aug 13, 2026\n  - Summary: This coverage discusses a large wave of lawsuits focusing on how social media platforms '
+2026-08-18 18:51:31,483 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:38 | [4] role='user' content='can you get latest cyber bullying news '
+2026-08-18 18:51:31,483 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:45 | [
+  {
+    "role": "user",
+    "content": "hey hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Hi there! How can I help today? I can:\n- Generate a document (NDA, employment agreement, rental agreement, etc.) \u2014 just tell me the type and key details.\n- Look up the latest legal news on a topic.\n- Explain a legal concept or answer questions.\n- Review or draft contract terms.\n\nWhat are you working on? If you want a document, share the type and any specifics (names, dates, terms)."
+  },
+  {
+    "role": "user",
+    "content": "can you get latest cyber bullying news "
+  },
+  {
+    "role": "assistant",
+    "content": "Here are some of the latest cyberbullying\u2013related news items I found:\n\n- Parents take on Meta, TikTok, Google, and Snap in 3,000 youth safety lawsuits\n  - Source: Malwarebytes\n  - Date: Aug 13, 2026\n  - Summary: This coverage discusses a large wave of lawsuits focusing on how social media platforms may affect youth safety online, including issues tangential to cyberbullying and online harassment.\n\n- EXCLUSIVE: Key HHS Official Dr. Stephanie Haridopolos Unpacks Screen Use Advisory And What MAHA Really Means\n  - Source: The Daily Caller\n  - Date: Aug 16, 2026\n  - Summary: An interview explaining screen use advisories and online safety measures for youth, which touches on protecting kids from online harms like cyberbullying.\n\n- Three school safety steps every parent should know before classes begin\n  - Source: Fox News (Opinion)\n  - Date: Aug 12, 2026\n  - Summary: Practical safety steps for parents, including online safety considerations relevant to cyberbullying in schools.\n\nWould you like me to refine this to:\n- Focus on a specific country or region (e.g., U.S., U.K., EU)?\n- Find strictly cyberbullying-specific legal cases and statutory changes?\n- Set up a short daily/weekly digest or alert for new cyberbullying-related news?"
+  },
+  {
+    "role": "user",
+    "content": "can you get latest cyber bullying news "
+  }
+]
+2026-08-18 18:51:35,427 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:51:35,512 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:66 | Agent iteration=1 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:35,512 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:79 | Detected 1 tool call(s) session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:35,513 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:112 | Tool requested: search_legal_news session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:35,513 | INFO | app.agents.tool_executor | tool_executor.py:26 | Executing tool=search_legal_news session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:35,513 | INFO | app.services.legal_news_service | legal_news_service.py:27 | Searching legal news query=cyberbullying session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:36,724 | INFO | httpx | _client.py:1740 | HTTP Request: GET https://newsapi.org/v2/everything?q=cyberbullying&language=en&sortBy=publishedAt&pageSize=10&apiKey=8ae81cdbd4434e5ab8cfc93e4453be80 "HTTP/1.1 200 OK"
+2026-08-18 18:51:36,728 | INFO | app.services.legal_news_service | legal_news_service.py:73 | Found 9 articles for query=cyberbullying
+2026-08-18 18:51:36,728 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:155 | Tool result: {'status': 'completed', 'message': 'Found 9 news articles.', 'data': {'query': 'cyberbullying', 'articles': [{'title': '2027: Gwamna, Pantami camps trade claims as Gombe politics heats up', 'description': 'By Ben Ngwakwe, Gombe GOMBE – Political activities in Gombe State are gathering momentum ahead of the 2027 governorship election, with supporters of the All Progressives Congress (APC) governorship candidate, Dr Jamil Isyaku Gwamna, and those of Professor Isa…', 'url': 'https://www.vanguardngr.com/2026/08/2027-gwamna-pantami-camps-trade-claims-as-gombe-politics-heats-up/', 'source': 'Vanguard', 'published_at': '2026-08-17T13:04:34Z'}, {'title': 'EXCLUSIVE: Key HHS Official Dr. Stephanie Haridopolos Unpacks Screen Use Advisory And What MAHA Really Means', 'description': 'Dr. Stephanie Haridopolos explained why monitoring children’s screen use is especially important right now.', 'url': 'https://dailycaller.com/2026/08/16/stephanie-haridopolos-interview-screen-use-advisory-maha-health-human-services', 'source': 'The Daily Caller', 'published_at': '2026-08-16T23:50:26Z'}, {'title': 'Homeschooling done well delivers six evidence-backed benefits', 'description': 'The honest list of homeschool benefits — the ones supported by representative-sample research, not advocacy material — is shorter and more conditional than Internet listicles might suggest: Homeschooling done well delivers six evidence-backed benefits: pace c…', 'url': 'https://www.isegoria.net/2026/08/homeschooling-done-well-delivers-six-evidence-backed-benefits/', 'source': 'Isegoria.net', 'published_at': '2026-08-14T14:57:13Z'}, {'title': 'California law puts digital fingerprints on AI fakes', 'description': 'The California AI Transparency Act now requires hidden provenance data in AI-generated images, video and audio, but these digital fingerprints have limits.', 'url': 'https://www.foxnews.com/tech/california-law-puts-digital-fingerprints-ai-fakes', 'source': 'Fox News', 'published_at': '2026-08-13T15:27:03Z'}, {'title': '14 Celebs Who Put Their Foot in Their Mouth Online, or to the Press', 'description': 'The celebrities we see in public and online aren’t the real people behind the face, that’s something that we need to acknowledge. Their public image is constructed by their publicists, managers, assistants, and other roles we aren’t privy to, something necess…', 'url': 'http://www.denofgeek.com/msn/14-celebs-who-put-their-foot-in-their-mouth-online-or-to-the-press/', 'source': 'Den of Geek US', 'published_at': '2026-08-13T11:30:00Z'}, {'title': 'A billion-dollar game deleted a character in 8 days. Then it had the worst month of its life', 'description': 'In June, Love and Deepspace took about $38m across the App Store and Google Play. In July it took just over $10m, mobilegamer.biz reported this week, citing Sensor Tower. The game slid to 16th in the monthly gacha rankings, having never before dropped out of …', 'url': 'https://thenextweb.com/news/love-and-deepspace-valko-cancelled-revenue-collapse-74-percent', 'source': 'The Next Web', 'published_at': '2026-08-13T10:26:41Z'}, {'title': 'Parents take on Meta, TikTok, Google, and Snap in 3,000 youth safety lawsuits', 'description': "It's the biggest legal challenge yet to addictive social media design and its impact on children.", 'url': 'https://www.malwarebytes.com/blog/privacy/2026/08/parents-take-on-meta-tiktok-google-and-snap-in-3000-youth-safety-lawsuits', 'source': 'Malwarebytes.com', 'published_at': '2026-08-13T09:59:48Z'}, {'title': 'Norton 360 With LifeLock Review: Top-Ranked Device Protection With Pioneering Identity Theft Remediation', 'description': 'PC Magazine is your complete guide to computers, phones, tablets, peripherals and more. We test and review the latest gadgets, products and services, report technology news and trends, and provide shopping advice and price comparisons.', 'url': 'https://uk.pcmag.com/security-suites/72588/norton-360-with-lifelock', 'source': 'PCMag.com', 'published_at': '2026-08-12T15:23:54Z'}, {'title': 'Three school safety steps every parent should know before classes begin', 'description': 'A parent outlines three essential back-to-school safety steps, from demanding emergency training for educators to evaluating personal safety tools.', 'url': 'https://www.foxnews.com/opinion/three-school-safety-steps-every-parent-should-know-before-classes-begin', 'source': 'Fox News', 'published_at': '2026-08-12T13:00:46Z'}]}}
+2026-08-18 18:51:45,598 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:51:45,654 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:66 | Agent iteration=2 session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:45,654 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:79 | Detected 0 tool call(s) session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8
+2026-08-18 18:51:45,654 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:91 | Agent produced final answer session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 iteration=2
+2026-08-18 18:51:56,806 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:51:57,715 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=4684, limit=2000) as a result of completing an in-flight request.
+2026-08-18 18:51:58,817 | INFO | app.services.chat_service | chat_service.py:253 | send_message completed successfully session_id=bb5b384b-a10f-4530-a0e4-ab512f303ff8 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-18 18:54:47,210 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 18:54:48,303 | ERROR | app.services.chat_service | chat_service.py:750 | Unexpected error in send_message_stream user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m522[0m, in [35msend_message_stream[0m
+    await SubscriptionGuardService.validate_usage_limits(
+    ...<2 lines>...
+    )
+  File [35m"F:\sattam_ai\SattamAI\app\services\subscription_guard_service.py"[0m, line [35m111[0m, in [35mvalidate_usage_limits[0m
+    raise ValueError(
+        "Daily token limit exceeded"
+    )
+[1;35mValueError[0m: [35mDaily token limit exceeded[0m
+2026-08-18 18:55:08,372 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-18 18:55:11,511 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb (messages=1, tokens=8)
+2026-08-18 18:55:11,517 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb
+2026-08-18 18:55:15,270 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:55:15,384 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:267 | Agent streaming iteration=1 session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb
+2026-08-18 18:55:15,385 | INFO | app.agents.tool_executor | tool_executor.py:26 | Executing tool=search_legal_news session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb
+2026-08-18 18:55:15,385 | INFO | app.services.legal_news_service | legal_news_service.py:27 | Searching legal news query=cyber bullying session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb
+2026-08-18 18:55:16,400 | INFO | httpx | _client.py:1740 | HTTP Request: GET https://newsapi.org/v2/everything?q=cyber+bullying&language=en&sortBy=publishedAt&pageSize=10&apiKey=8ae81cdbd4434e5ab8cfc93e4453be80 "HTTP/1.1 200 OK"
+2026-08-18 18:55:16,406 | INFO | app.services.legal_news_service | legal_news_service.py:73 | Found 10 articles for query=cyber bullying
+2026-08-18 18:55:31,373 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:55:31,427 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:267 | Agent streaming iteration=2 session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb
+2026-08-18 18:55:56,731 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-18 18:55:57,715 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=4855, limit=2000) as a result of completing an in-flight request.
+2026-08-18 18:55:59,003 | INFO | app.services.chat_service | chat_service.py:716 | send_message_stream completed session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb user_id=95313963-5c0b-49f6-afcf-7a71c8b13865

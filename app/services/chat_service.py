@@ -18,6 +18,7 @@ from app.models import (
     UserAIUsage,
     User,
 )
+from app.services.response_formatter import ResponseFormatter
 from app.schemas.history_management_schema import ChatHistoryConfig
 from app.services.agent_loop.agent_loop_service import AgentLoopService
 from app.services.subscription_guard_service import SubscriptionGuardService
@@ -192,6 +193,12 @@ class ChatService:
                 user=user,
                 session=session,
             )
+
+            formatted_response = await ResponseFormatter.format(
+                answer=agent_result["answer"],
+                status=agent_result["status"],
+                data=agent_result.get("data", {}),
+            )
             input_tokens = agent_result["input_tokens"]
             output_tokens = agent_result["output_tokens"]
             total_tokens = agent_result["total_tokens"]
@@ -199,7 +206,6 @@ class ChatService:
             status = agent_result["status"]
             assistant_message = agent_result["answer"]
             data = agent_result.get("data", {})
-            events = agent_result.get("events",[])
 
             # PHASE 4
 
@@ -252,12 +258,17 @@ class ChatService:
             return {
                 "status": status,
                 "answer": assistant_message,
+
+                # structured frontend response
+                "response": formatted_response,
+
                 "data": data,
                 "session_id": str(session.id),
+
                 "input_tokens": input_tokens,
                 "output_tokens": output_tokens,
                 "total_tokens": total_tokens,
-                "events": events,
+                "session_id":session.id,
             }
         
         except (
@@ -435,3 +446,317 @@ class ChatService:
         await db.delete(session)
 
         await db.commit()
+
+
+
+    @staticmethod
+    async def send_message_stream(
+        db,
+        user,
+        message: str,
+        session_id=None,
+        file_ids: list[str] | None = None,
+    ):
+        try:
+            # =====================================================
+            # PHASE 1 — SESSION / SUBSCRIPTION / USER MESSAGE
+            # =====================================================
+
+            logger.info(
+                "send_message_stream started user_id=%s session_id=%s",
+                user.id,
+                session_id,
+            )
+
+            if session_id:
+
+                session = await db.scalar(
+                    select(ChatSession).where(
+                        ChatSession.id == session_id,
+                        ChatSession.user_id == user.id,
+                    )
+                )
+
+                if not session:
+                    raise ValueError("Chat session not found")
+
+            else:
+
+                session = ChatSession(
+                    user_id=user.id,
+                    title=message[:100],
+                )
+
+                db.add(session)
+                await db.flush()
+
+            subscription = (
+                await SubscriptionGuardService.get_active_subscription(
+                    db,
+                    user,
+                )
+            )
+
+            history_config = ChatHistoryConfig(
+                history_token_budget=
+                    subscription.plan.history_token_budget,
+
+                summary_trigger_tokens=
+                    subscription.plan.summary_trigger_tokens,
+
+                max_summary_input_tokens=
+                    subscription.plan.max_summary_input_tokens,
+            )
+
+            usage = (
+                await SubscriptionGuardService.get_usage(
+                    db,
+                    user,
+                )
+            )
+
+            await SubscriptionGuardService.reset_usage_if_needed(
+                usage,
+            )
+
+            await SubscriptionGuardService.validate_usage_limits(
+                subscription,
+                usage,
+            )
+
+            db.add(
+                ChatMessage(
+                    session_id=session.id,
+                    role="user",
+                    content=message,
+                    token_count=count_tokens(message),
+                )
+            )
+
+            await db.commit()
+
+            # =====================================================
+            # PHASE 2 — HISTORY + RAG
+            # =====================================================
+
+            session = await db.get(
+                ChatSession,
+                session.id,
+            )
+
+            await ChatHistoryService.summarize_if_needed(
+                db,
+                session,
+                history_config,
+            )
+
+            await db.commit()
+
+            conversation = (
+                await ChatHistoryService.build_conversation(
+                    db,
+                    session,
+                    history_config,
+                )
+            )
+
+            rag_context = await RAGService.build_rag_context(
+                db=db,
+                user_id=user.id,
+                query=message,
+                file_ids=file_ids,
+            )
+
+            conversation = RAGService.inject_context(
+                conversation,
+                rag_context,
+            )
+
+            # =====================================================
+            # PHASE 3 — STREAM AGENT EVENTS
+            # =====================================================
+
+            final_result = None
+
+            async for event in AgentLoopService.run_stream(
+                conversation=list(conversation),
+                db=db,
+                user=user,
+                session=session,
+            ):
+
+                # Send event immediately to API
+                yield event
+
+                # Keep final result for DB / usage processing
+                if event.get("type") == "final":
+                    final_result = event
+
+            # =====================================================
+            # PHASE 4 — FINAL RESULT
+            # =====================================================
+
+            if not final_result:
+                raise RuntimeError(
+                    "Agent finished without producing a final response."
+                )
+
+            assistant_message = final_result.get(
+                "answer",
+                "",
+            )
+
+            status = final_result.get(
+                "status",
+                "completed",
+            )
+
+            # -----------------------------------------------------
+            # IMPORTANT:
+            # Your run_stream() currently doesn't return token
+            # usage yet. We'll add that in the next step.
+            # -----------------------------------------------------
+
+            input_tokens = final_result.get(
+                "input_tokens",
+                0,
+            )
+
+            output_tokens = final_result.get(
+                "output_tokens",
+                count_tokens(assistant_message),
+            )
+
+            total_tokens = final_result.get(
+                "total_tokens",
+                input_tokens + output_tokens,
+            )
+
+            # =====================================================
+            # FORMAT FINAL RESPONSE
+            # =====================================================
+
+            formatted_response = await ResponseFormatter.format(
+                answer=assistant_message,
+                status=status,
+                data=final_result.get(
+                    "data",
+                    {},
+                ),
+            )
+
+            # =====================================================
+            # CONSUME TOKEN USAGE
+            # =====================================================
+
+            subscription = (
+                await SubscriptionGuardService.get_active_subscription(
+                    db,
+                    user,
+                )
+            )
+
+            usage = (
+                await SubscriptionGuardService.get_usage(
+                    db,
+                    user,
+                )
+            )
+
+            await SubscriptionGuardService.reset_usage_if_needed(
+                usage,
+            )
+
+            await SubscriptionGuardService.consume_tokens(
+                subscription,
+                usage,
+                total_tokens,
+            )
+
+            # =====================================================
+            # SAVE ASSISTANT MESSAGE
+            # =====================================================
+
+            db.add(
+                ChatMessage(
+                    session_id=session.id,
+                    role="assistant",
+                    content=assistant_message,
+                    token_count=output_tokens,
+                )
+            )
+
+            session = await db.get(
+                ChatSession,
+                session.id,
+            )
+
+            session.updated_at = utc_now()
+
+            await db.commit()
+
+            # =====================================================
+            # FINAL API EVENT
+            # =====================================================
+
+            yield {
+                "type": "response",
+                "status": status,
+                "response": formatted_response,
+                "data": final_result.get(
+                    "data",
+                    {},
+                ),
+                "session_id": str(session.id),
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+                "total_tokens": total_tokens,
+            }
+
+            logger.info(
+                "send_message_stream completed "
+                "session_id=%s user_id=%s",
+                session.id,
+                user.id,
+            )
+
+        except (
+            RateLimitError,
+            APIConnectionError,
+            APITimeoutError,
+            asyncio.TimeoutError,
+        ) as exc:
+
+            logger.warning(
+                "AI provider call failed "
+                "user=%s session_id=%s: %s",
+                user.id,
+                session_id,
+                exc,
+            )
+
+            await db.rollback()
+
+            yield {
+                "type": "error",
+                "message": (
+                    "AI service is temporarily unavailable. "
+                    "Please try again."
+                ),
+            }
+
+        except Exception as exc:
+
+            logger.exception(
+                "Unexpected error in send_message_stream "
+                "user=%s session_id=%s",
+                user.id,
+                session_id,
+            )
+
+            await db.rollback()
+
+            yield {
+                "type": "error",
+                "message": "Something went wrong. Please try again.",
+            }

@@ -3,7 +3,7 @@ import asyncio
 import json
 from app.agents.tool_executor import ToolExecutor
 from app.helpers.openai_client import client
-from app.agents.tools import TOOLS
+from app.agents.tools import TOOLS,TOOL_MESSAGES
 from app.config import get_settings
 
 logger = logging.getLogger(__name__)
@@ -221,6 +221,209 @@ class AgentLoopService:
             ),
             "data": {},
             "events": events,
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "total_tokens": total_tokens,
+        }
+
+
+
+
+    @staticmethod
+    async def run_stream(
+        *,
+        conversation: list,
+        db,
+        user,
+        session,
+    ):
+        logger.info(
+            "Agent streaming loop started session_id=%s",
+            session.id,
+        )
+
+        input_tokens = 0
+        output_tokens = 0
+        total_tokens = 0
+
+        response = await client.responses.create(
+            model=settings.DEPLOYMENT_NAME,
+            input=conversation,
+            tools=TOOLS,
+        )
+
+        # ---------------------------------------------
+        # TOKEN USAGE — FIRST LLM CALL
+        # ---------------------------------------------
+
+        input_tokens += response.usage.input_tokens
+        output_tokens += response.usage.output_tokens
+        total_tokens += response.usage.total_tokens
+
+        for iteration in range(
+            AgentLoopService.MAX_ITERATIONS
+        ):
+
+            logger.info(
+                "Agent streaming iteration=%s session_id=%s",
+                iteration + 1,
+                session.id,
+            )
+
+            tool_calls = [
+                item
+                for item in response.output
+                if getattr(item, "type", None)
+                == "function_call"
+            ]
+
+            # ---------------------------------------------
+            # FINAL ANSWER
+            # ---------------------------------------------
+
+            if not tool_calls:
+
+                yield {
+                    "type": "final",
+                    "status": "completed",
+                    "answer": response.output_text,
+                    "data": {},
+                    "input_tokens": input_tokens,
+                    "output_tokens": output_tokens,
+                    "total_tokens": total_tokens,
+                }
+
+                return
+
+            tool_outputs = []
+
+            for tool_call in tool_calls:
+
+                try:
+                    arguments = json.loads(
+                        tool_call.arguments or "{}"
+                    )
+
+                except json.JSONDecodeError:
+
+                    logger.exception(
+                        "Invalid tool arguments tool=%s",
+                        tool_call.name,
+                    )
+
+                    arguments = {}
+
+                # ---------------------------------------------
+                # TOOL STARTED
+                # ---------------------------------------------
+
+                yield {
+                    "type": "status",
+                    "status": "running",
+                    "tool": tool_call.name,
+                    "message": TOOL_MESSAGES.get(
+                        tool_call.name,
+                        {}
+                    ).get(
+                        "running",
+                        "Working on your request...",
+                    ),
+                }
+
+                # ---------------------------------------------
+                # EXECUTE TOOL
+                # ---------------------------------------------
+
+                tool_result = await ToolExecutor.execute(
+                    tool_name=tool_call.name,
+                    arguments=arguments,
+                    db=db,
+                    user=user,
+                    session=session,
+                )
+
+                # ---------------------------------------------
+                # TOOL COMPLETED
+                # ---------------------------------------------
+
+                yield {
+                    "type": "status",
+                    "status": "completed",
+                    "tool": tool_call.name,
+                    "message": TOOL_MESSAGES.get(
+                        tool_call.name,
+                        {}
+                    ).get(
+                        "completed",
+                        "Finished working on your request.",
+                    ),
+                }
+
+                # ---------------------------------------------
+                # TOOL NEEDS INPUT
+                # ---------------------------------------------
+
+                if tool_result.get("status") == "needs_input":
+
+                    yield {
+                        "type": "needs_input",
+                        "tool_name": tool_call.name,
+                        "answer": tool_result.get("message"),
+                        "data": tool_result.get(
+                            "data",
+                            {},
+                        ),
+                    }
+
+                    return
+
+                # ---------------------------------------------
+                # TOOL OUTPUT FOR MODEL
+                # ---------------------------------------------
+
+                tool_outputs.append(
+                    {
+                        "type": "function_call_output",
+                        "call_id": tool_call.call_id,
+                        "output": json.dumps(
+                            tool_result,
+                            default=str,
+                        ),
+                    }
+                )
+
+            # ---------------------------------------------
+            # NEXT LLM CALL
+            # ---------------------------------------------
+
+            response = await client.responses.create(
+                model=settings.DEPLOYMENT_NAME,
+                previous_response_id=response.id,
+                input=tool_outputs,
+                tools=TOOLS,
+            )
+
+            # ---------------------------------------------
+            # TOKEN USAGE — NEXT LLM CALL
+            # ---------------------------------------------
+
+            input_tokens += response.usage.input_tokens
+            output_tokens += response.usage.output_tokens
+            total_tokens += response.usage.total_tokens
+
+        # ---------------------------------------------
+        # MAX ITERATIONS
+        # ---------------------------------------------
+
+        yield {
+            "type": "final",
+            "status": "max_iterations",
+            "answer": (
+                response.output_text
+                if response.output_text
+                else "Maximum agent iterations reached."
+            ),
+            "data": {},
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
             "total_tokens": total_tokens,
