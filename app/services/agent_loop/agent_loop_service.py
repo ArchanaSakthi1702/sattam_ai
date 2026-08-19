@@ -241,7 +241,7 @@ class AgentLoopService:
             "Agent streaming loop started session_id=%s",
             session.id,
         )
-
+        last_tool_data = {}
         input_tokens = 0
         output_tokens = 0
         total_tokens = 0
@@ -287,7 +287,7 @@ class AgentLoopService:
                     "type": "final",
                     "status": "completed",
                     "answer": response.output_text,
-                    "data": {},
+                    "data": last_tool_data,
                     "input_tokens": input_tokens,
                     "output_tokens": output_tokens,
                     "total_tokens": total_tokens,
@@ -379,7 +379,12 @@ class AgentLoopService:
                         "total_tokens": total_tokens,
                     }
 
-                    return
+
+                if tool_result.get("status") == "completed":
+                    last_tool_data = tool_result.get(
+                        "data",
+                        {},
+                    )
 
                 # ---------------------------------------------
                 # TOOL OUTPUT FOR MODEL
@@ -427,7 +432,7 @@ class AgentLoopService:
                 if response.output_text
                 else "Maximum agent iterations reached."
             ),
-            "data": {},
+           "data": last_tool_data,
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
             "total_tokens": total_tokens,
