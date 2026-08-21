@@ -241,7 +241,7 @@ class AgentLoopService:
             "Agent streaming loop started session_id=%s",
             session.id,
         )
-        last_tool_data = {}
+
         input_tokens = 0
         output_tokens = 0
         total_tokens = 0
@@ -252,13 +252,11 @@ class AgentLoopService:
             tools=TOOLS,
         )
 
-        # ---------------------------------------------
-        # TOKEN USAGE — FIRST LLM CALL
-        # ---------------------------------------------
-
         input_tokens += response.usage.input_tokens
         output_tokens += response.usage.output_tokens
         total_tokens += response.usage.total_tokens
+
+        tool_data = []
 
         for iteration in range(
             AgentLoopService.MAX_ITERATIONS
@@ -269,6 +267,10 @@ class AgentLoopService:
                 iteration + 1,
                 session.id,
             )
+
+            # ---------------------------------------------
+            # DATA FROM THIS ITERATION ONLY
+            # ---------------------------------------------
 
             tool_calls = [
                 item
@@ -287,7 +289,7 @@ class AgentLoopService:
                     "type": "final",
                     "status": "completed",
                     "answer": response.output_text,
-                    "data": last_tool_data,
+                    "data": tool_data,
                     "input_tokens": input_tokens,
                     "output_tokens": output_tokens,
                     "total_tokens": total_tokens,
@@ -323,7 +325,7 @@ class AgentLoopService:
                     "tool": tool_call.name,
                     "message": TOOL_MESSAGES.get(
                         tool_call.name,
-                        {}
+                        {},
                     ).get(
                         "running",
                         "Working on your request...",
@@ -343,7 +345,7 @@ class AgentLoopService:
                 )
 
                 # ---------------------------------------------
-                # TOOL COMPLETED
+                # TOOL COMPLETED EVENT
                 # ---------------------------------------------
 
                 yield {
@@ -352,7 +354,7 @@ class AgentLoopService:
                     "tool": tool_call.name,
                     "message": TOOL_MESSAGES.get(
                         tool_call.name,
-                        {}
+                        {},
                     ).get(
                         "completed",
                         "Finished working on your request.",
@@ -360,7 +362,7 @@ class AgentLoopService:
                 }
 
                 # ---------------------------------------------
-                # TOOL NEEDS INPUT
+                # NEEDS INPUT
                 # ---------------------------------------------
 
                 if tool_result.get("status") == "needs_input":
@@ -369,7 +371,9 @@ class AgentLoopService:
                         "type": "final",
                         "status": "needs_input",
                         "tool_name": tool_call.name,
-                        "answer": tool_result.get("message"),
+                        "answer": tool_result.get(
+                            "message"
+                        ),
                         "data": tool_result.get(
                             "data",
                             {},
@@ -379,12 +383,21 @@ class AgentLoopService:
                         "total_tokens": total_tokens,
                     }
 
+                    return
+
+                # ---------------------------------------------
+                # STORE ONLY CURRENT ITERATION TOOL DATA
+                # ---------------------------------------------
 
                 if tool_result.get("status") == "completed":
-                    last_tool_data = tool_result.get(
-                        "data",
-                        {},
-                    )
+
+                    tool_data.append({
+                        "tool": tool_call.name,
+                        "data": tool_result.get(
+                            "data",
+                            {},
+                        ),
+                    })
 
                 # ---------------------------------------------
                 # TOOL OUTPUT FOR MODEL
@@ -412,10 +425,6 @@ class AgentLoopService:
                 tools=TOOLS,
             )
 
-            # ---------------------------------------------
-            # TOKEN USAGE — NEXT LLM CALL
-            # ---------------------------------------------
-
             input_tokens += response.usage.input_tokens
             output_tokens += response.usage.output_tokens
             total_tokens += response.usage.total_tokens
@@ -432,7 +441,7 @@ class AgentLoopService:
                 if response.output_text
                 else "Maximum agent iterations reached."
             ),
-           "data": last_tool_data,
+            "data": tool_data,
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
             "total_tokens": total_tokens,

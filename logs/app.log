@@ -5208,3 +5208,94 @@ Traceback (most recent call last):
 2026-08-18 18:55:56,731 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
 2026-08-18 18:55:57,715 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=4855, limit=2000) as a result of completing an in-flight request.
 2026-08-18 18:55:59,003 | INFO | app.services.chat_service | chat_service.py:716 | send_message_stream completed session_id=f86ef19e-aabf-485f-aee1-b0706e027ceb user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-19 19:31:24,005 | INFO | app.services.auth_service | auth_service.py:218 | Login attempt | email=sakthieditz99@gmail.com
+2026-08-19 19:31:33,350 | INFO | app.services.auth_service | auth_service.py:279 | Login successful | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-19 19:31:33,412 | INFO | app.services.auth_service | auth_service.py:298 | JWT tokens generated | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-19 19:31:48,353 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-19 19:31:51,614 | ERROR | app.services.chat_service | chat_service.py:757 | Unexpected error in send_message_stream user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m522[0m, in [35msend_message_stream[0m
+    await SubscriptionGuardService.validate_usage_limits(
+    ...<2 lines>...
+    )
+  File [35m"F:\sattam_ai\SattamAI\app\services\subscription_guard_service.py"[0m, line [35m111[0m, in [35mvalidate_usage_limits[0m
+    raise ValueError(
+        "Daily token limit exceeded"
+    )
+[1;35mValueError[0m: [35mDaily token limit exceeded[0m
+2026-08-19 19:33:27,085 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-19 19:33:34,958 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=8fb0735a-5829-486a-b685-9ffffc5b802a (messages=1, tokens=8)
+2026-08-19 19:33:34,962 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=8fb0735a-5829-486a-b685-9ffffc5b802a
+2026-08-19 19:33:37,432 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-19 19:33:38,116 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': '869baf8d-77d8-45e8-b1d3-909c94429800'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Wed, 19 Aug 2026 14:03:38 GMT'
+    'Content-Length': '1743'
+2026-08-19 19:33:38,118 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-19 19:33:47,670 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-19 19:33:48,150 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:263 | Agent streaming iteration=1 session_id=8fb0735a-5829-486a-b685-9ffffc5b802a
+2026-08-19 19:33:48,151 | INFO | app.agents.tool_executor | tool_executor.py:26 | Executing tool=search_legal_news session_id=8fb0735a-5829-486a-b685-9ffffc5b802a
+2026-08-19 19:33:48,152 | INFO | app.services.legal_news_service | legal_news_service.py:27 | Searching legal news query=cyberbullying session_id=8fb0735a-5829-486a-b685-9ffffc5b802a
+2026-08-19 19:33:49,047 | INFO | httpx | _client.py:1740 | HTTP Request: GET https://newsapi.org/v2/everything?q=cyberbullying&language=en&sortBy=publishedAt&pageSize=10&apiKey=8ae81cdbd4434e5ab8cfc93e4453be80 "HTTP/1.1 200 OK"
+2026-08-19 19:33:49,051 | INFO | app.services.legal_news_service | legal_news_service.py:73 | Found 9 articles for query=cyberbullying
+2026-08-19 19:34:08,728 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-19 19:34:08,789 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:263 | Agent streaming iteration=2 session_id=8fb0735a-5829-486a-b685-9ffffc5b802a
+2026-08-19 19:34:09,855 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=4223, limit=2000) as a result of completing an in-flight request.
+2026-08-19 19:34:12,435 | INFO | app.services.chat_service | chat_service.py:723 | send_message_stream completed session_id=8fb0735a-5829-486a-b685-9ffffc5b802a user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-19 19:39:40,652 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-19 19:39:46,432 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620 (messages=1, tokens=8)
+2026-08-19 19:39:46,434 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620
+2026-08-19 19:39:49,544 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-19 19:39:50,016 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': 'd1680ca7-c30f-4216-b150-e7f72027ba00'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Wed, 19 Aug 2026 14:09:50 GMT'
+    'Content-Length': '1739'
+2026-08-19 19:39:50,018 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-19 19:39:56,175 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-19 19:39:57,071 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:265 | Agent streaming iteration=1 session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620
+2026-08-19 19:39:57,077 | INFO | app.agents.tool_executor | tool_executor.py:26 | Executing tool=search_legal_news session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620
+2026-08-19 19:39:57,078 | INFO | app.services.legal_news_service | legal_news_service.py:27 | Searching legal news query=cyberbullying session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620
+2026-08-19 19:39:58,820 | INFO | httpx | _client.py:1740 | HTTP Request: GET https://newsapi.org/v2/everything?q=cyberbullying&language=en&sortBy=publishedAt&pageSize=10&apiKey=8ae81cdbd4434e5ab8cfc93e4453be80 "HTTP/1.1 200 OK"
+2026-08-19 19:39:58,826 | INFO | app.services.legal_news_service | legal_news_service.py:73 | Found 9 articles for query=cyberbullying
+2026-08-19 19:40:22,852 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-19 19:40:23,100 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:265 | Agent streaming iteration=2 session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620
+2026-08-19 19:40:24,095 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=4660, limit=2000) as a result of completing an in-flight request.
+2026-08-19 19:40:25,991 | INFO | app.services.chat_service | chat_service.py:723 | send_message_stream completed session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865

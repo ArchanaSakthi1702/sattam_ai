@@ -636,13 +636,20 @@ class ChatService:
             # FORMAT FINAL RESPONSE
             # =====================================================
 
+            tool_results = final_result.get("data", [])
+
+            combined_data = {}
+
+            for tool_result in tool_results:
+                tool_data = tool_result.get("data", {})
+
+                if isinstance(tool_data, dict):
+                    combined_data.update(tool_data)
+
             formatted_response = await ResponseFormatter.format(
                 answer=assistant_message,
                 status=status,
-                data=final_result.get(
-                    "data",
-                    {},
-                ),
+                data=combined_data,
             )
 
             # =====================================================
