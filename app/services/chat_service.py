@@ -636,7 +636,7 @@ class ChatService:
             # FORMAT FINAL RESPONSE
             # =====================================================
 
-            tool_results = final_result.get("data", [])
+            """tool_results = final_result.get("data", [])
 
             combined_data = {}
 
@@ -650,7 +650,7 @@ class ChatService:
                 answer=assistant_message,
                 status=status,
                 data=combined_data,
-            )
+            )"""
 
             # =====================================================
             # CONSUME TOKEN USAGE
@@ -709,7 +709,6 @@ class ChatService:
             yield {
                 "type": "response",
                 "status": status,
-                "response": formatted_response,
                 "data": final_result.get(
                     "data",
                     {},

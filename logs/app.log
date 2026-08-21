@@ -5299,3 +5299,6 @@ Response headers:
 2026-08-19 19:40:23,100 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:265 | Agent streaming iteration=2 session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620
 2026-08-19 19:40:24,095 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=4660, limit=2000) as a result of completing an in-flight request.
 2026-08-19 19:40:25,991 | INFO | app.services.chat_service | chat_service.py:723 | send_message_stream completed session_id=2bf666a5-5cd3-4084-a4eb-1163be75d620 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-21 11:52:15,472 | INFO | app.services.auth_service | auth_service.py:218 | Login attempt | email=sakthieditz99@gmail.com
+2026-08-21 11:52:25,618 | INFO | app.services.auth_service | auth_service.py:279 | Login successful | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-21 11:52:25,659 | INFO | app.services.auth_service | auth_service.py:298 | JWT tokens generated | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865

@@ -261,18 +261,6 @@ class SubscriptionService:
         user: User,
         plan_id: UUID,
     ):
-        active_subscription = await db.scalar(
-            select(UserSubscription).where(
-                UserSubscription.user_id == user.id,
-                UserSubscription.is_active.is_(True),
-            )
-        )
-
-        if active_subscription:
-            raise ValueError(
-                "You already have an active subscription plan."
-            )
-
         plan = await db.scalar(
             select(SubscriptionPlan).where(
                 SubscriptionPlan.id == plan_id
@@ -362,6 +350,10 @@ class SubscriptionService:
                 detail="Payment already verified",
             )
 
+        # ==========================================
+        # VERIFY RAZORPAY PAYMENT
+        # ==========================================
+
         try:
             client.utility.verify_payment_signature(
                 {
@@ -377,6 +369,10 @@ class SubscriptionService:
                 detail="Payment verification failed",
             )
 
+        # ==========================================
+        # GET PLAN
+        # ==========================================
+
         plan = await db.scalar(
             select(SubscriptionPlan).where(
                 SubscriptionPlan.id == payment.plan_id
@@ -389,6 +385,10 @@ class SubscriptionService:
                 detail="Subscription plan not found",
             )
 
+        # ==========================================
+        # DEACTIVATE OLD SUBSCRIPTION
+        # ==========================================
+
         active_subscription = await db.scalar(
             select(UserSubscription).where(
                 UserSubscription.user_id == user.id,
@@ -397,25 +397,35 @@ class SubscriptionService:
         )
 
         if active_subscription:
-            raise HTTPException(
-                status_code=400,
-                detail="User already has an active subscription",
-            )
+            active_subscription.is_active = False
+
+        # ==========================================
+        # UPDATE PAYMENT
+        # ==========================================
 
         payment.status = "paid"
+
         payment.razorpay_payment_id = (
             payload.razorpay_payment_id
         )
+
         payment.razorpay_signature = (
             payload.razorpay_signature
         )
+
         payment.paid_at = utc_now()
+
+        # ==========================================
+        # CREATE NEW SUBSCRIPTION
+        # ==========================================
+
+        now = utc_now()
 
         subscription = UserSubscription(
             user_id=user.id,
             plan_id=plan.id,
-            started_at=utc_now(),
-            expires_at=utc_now() + timedelta(days=30),
+            started_at=now,
+            expires_at=now + timedelta(days=30),
             is_active=True,
         )
 
@@ -423,13 +433,16 @@ class SubscriptionService:
 
         await db.commit()
 
+        # ==========================================
+        # RESPONSE
+        # ==========================================
+
         return {
             "message": "Subscription activated successfully",
             "subscription_id": str(subscription.id),
             "plan_name": plan.name,
             "expires_at": subscription.expires_at,
         }
-
 
         
 
