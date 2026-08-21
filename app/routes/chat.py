@@ -208,7 +208,6 @@ async def stream_message(
             })}\n\n"
 
         except Exception:
-            logger.exception("Error while streaming message")
 
             yield f"data: {json.dumps({
                 'type': 'error',
