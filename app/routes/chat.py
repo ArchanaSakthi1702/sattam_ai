@@ -184,24 +184,36 @@ async def delete_session(
             detail=str(e),
         )
 
-
 @router.post("/stream")
 async def stream_message(
     request: ChatRequest,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
-
     async def event_generator():
+        try:
+            async for event in ChatService.send_message_stream(
+                db=db,
+                user=user,
+                message=request.message,
+                session_id=request.session_id,
+                file_ids=request.file_ids,
+            ):
+                yield f"data: {json.dumps(event, default=str)}\n\n"
 
-        async for event in ChatService.send_message_stream(
-            db=db,
-            user=user,
-            message=request.message,
-            session_id=request.session_id,
-            file_ids=request.file_ids,
-        ):
-            yield f"data: {json.dumps(event, default=str)}\n\n"
+        except ValueError as e:
+            yield f"data: {json.dumps({
+                'type': 'error',
+                'message': str(e),
+            })}\n\n"
+
+        except Exception:
+            logger.exception("Error while streaming message")
+
+            yield f"data: {json.dumps({
+                'type': 'error',
+                'message': 'Something went wrong.',
+            })}\n\n"
 
     return StreamingResponse(
         event_generator(),
