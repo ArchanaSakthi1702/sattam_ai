@@ -38,21 +38,6 @@ TOOLS = [
 },
     {
         "type": "function",
-        "name": "get_current_time",
-        "description": (
-            "Get the current date and time."
-            "Use when the user asks for the current time,"
-            "current date, today's date, day of week,"
-            "or needs the current timestamp."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {},
-            "additionalProperties": False,
-        },
-    },
-    {
-        "type": "function",
         "name": "generate_document",
         "description": (
             "Generate a legal document."

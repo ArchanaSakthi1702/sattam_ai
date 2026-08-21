@@ -586,11 +586,12 @@ class ChatService:
             ):
 
                 # Send event immediately to API
-                yield event
-
-                # Keep final result for DB / usage processing
                 if event.get("type") == "final":
                     final_result = event
+                    continue
+
+                # Send all other events immediately
+                yield event
 
             # =====================================================
             # PHASE 4 — FINAL RESULT
@@ -713,6 +714,7 @@ class ChatService:
                     "data",
                     {},
                 ),
+                "answer": assistant_message,
                 "session_id": str(session.id),
                 "input_tokens": input_tokens,
                 "output_tokens": output_tokens,
