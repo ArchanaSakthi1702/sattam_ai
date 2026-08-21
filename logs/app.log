@@ -5396,3 +5396,37 @@ Response headers:
 2026-08-21 12:32:38,675 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:155 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded daily AI token limit (used=3944, limit=2000) as a result of completing an in-flight request.
 2026-08-21 12:32:38,676 | WARNING | app.services.subscription_guard_service | subscription_guard_service.py:168 | User 95313963-5c0b-49f6-afcf-7a71c8b13865 exceeded monthly AI token limit (used=62432, limit=60000) as a result of completing an in-flight request.
 2026-08-21 12:32:41,260 | INFO | app.services.chat_service | chat_service.py:722 | send_message_stream completed session_id=83455979-4152-4bb5-b8f1-504159a56b60 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-21 12:52:08,390 | INFO | app.services.auth_service | auth_service.py:218 | Login attempt | email=sakthieditz99@gmail.com
+2026-08-21 12:52:17,765 | INFO | app.services.auth_service | auth_service.py:279 | Login successful | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-21 12:52:17,775 | INFO | app.services.auth_service | auth_service.py:298 | JWT tokens generated | user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-21 12:52:29,970 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=83455979-4152-4bb5-b8f1-504159a56b60
+2026-08-21 12:52:34,972 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=83455979-4152-4bb5-b8f1-504159a56b60 (messages=11, tokens=4335)
+2026-08-21 12:52:34,973 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=83455979-4152-4bb5-b8f1-504159a56b60
+2026-08-21 12:52:36,524 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:532 | Request URL: 'https://login.microsoftonline.com/a7c7e219-3ec9-4144-9e16-f342bb82cb92/oauth2/v2.0/token'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/x-www-form-urlencoded'
+    'User-Agent': 'azsdk-python-identity/1.25.3 Python/3.13.4 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-08-21 12:52:37,456 | INFO | azure.core.pipeline.policies.http_logging_policy | _universal.py:581 | Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Content-Type': 'application/json; charset=utf-8'
+    'Expires': '-1'
+    'Strict-Transport-Security': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-clientdata': 'REDACTED'
+    'P3P': 'REDACTED'
+    'x-ms-request-id': '6405d4e8-10bd-4e0c-8f40-2883a0e21700'
+    'x-ms-ests-server': 'REDACTED'
+    'x-ms-srs': 'REDACTED'
+    'Content-Security-Policy-Report-Only': 'REDACTED'
+    'X-XSS-Protection': 'REDACTED'
+    'Set-Cookie': 'REDACTED'
+    'Date': 'Fri, 21 Aug 2026 07:22:37 GMT'
+    'Content-Length': '1743'
+2026-08-21 12:52:37,464 | INFO | azure.identity.aio._internal.get_token_mixin | get_token_mixin.py:139 | ClientSecretCredential.get_token_info succeeded
+2026-08-21 12:52:45,077 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
+2026-08-21 12:52:45,654 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:265 | Agent streaming iteration=1 session_id=83455979-4152-4bb5-b8f1-504159a56b60
+2026-08-21 12:52:49,319 | INFO | app.services.chat_service | chat_service.py:724 | send_message_stream completed session_id=83455979-4152-4bb5-b8f1-504159a56b60 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865

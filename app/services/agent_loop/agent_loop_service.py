@@ -245,6 +245,7 @@ class AgentLoopService:
         input_tokens = 0
         output_tokens = 0
         total_tokens = 0
+        api_calls = 1 
 
         response = await client.responses.create(
             model=settings.DEPLOYMENT_NAME,
@@ -261,13 +262,6 @@ class AgentLoopService:
         for iteration in range(
             AgentLoopService.MAX_ITERATIONS
         ):
-
-            logger.info(
-                "Agent streaming iteration=%s session_id=%s",
-                iteration + 1,
-                session.id,
-            )
-
             # ---------------------------------------------
             # DATA FROM THIS ITERATION ONLY
             # ---------------------------------------------
@@ -284,6 +278,12 @@ class AgentLoopService:
             # ---------------------------------------------
 
             if not tool_calls:
+
+                logger.info(
+                    "Agent completed session_id=%s api_calls=%s",
+                    session.id,
+                    api_calls,
+                )
 
                 yield {
                     "type": "final",
@@ -367,6 +367,12 @@ class AgentLoopService:
 
                 if tool_result.get("status") == "needs_input":
 
+                    logger.info(
+                        "Agent completed session_id=%s api_calls=%s",
+                        session.id,
+                        api_calls,
+                    )
+
                     yield {
                         "type": "final",
                         "status": "needs_input",
@@ -417,13 +423,14 @@ class AgentLoopService:
             # ---------------------------------------------
             # NEXT LLM CALL
             # ---------------------------------------------
-
             response = await client.responses.create(
                 model=settings.DEPLOYMENT_NAME,
                 previous_response_id=response.id,
                 input=tool_outputs,
                 tools=TOOLS,
             )
+
+            api_calls += 1
 
             input_tokens += response.usage.input_tokens
             output_tokens += response.usage.output_tokens
@@ -432,6 +439,12 @@ class AgentLoopService:
         # ---------------------------------------------
         # MAX ITERATIONS
         # ---------------------------------------------
+
+        logger.info(
+            "Agent completed session_id=%s api_calls=%s",
+            session.id,
+            api_calls,
+        )
 
         yield {
             "type": "final",
