@@ -5430,3 +5430,20 @@ Response headers:
 2026-08-21 12:52:45,077 | INFO | httpx | _client.py:1740 | HTTP Request: POST https://sattamai-resource.services.ai.azure.com/api/projects/sattamai/openai/v1/responses "HTTP/1.1 200 OK"
 2026-08-21 12:52:45,654 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:265 | Agent streaming iteration=1 session_id=83455979-4152-4bb5-b8f1-504159a56b60
 2026-08-21 12:52:49,319 | INFO | app.services.chat_service | chat_service.py:724 | send_message_stream completed session_id=83455979-4152-4bb5-b8f1-504159a56b60 user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-21 13:16:11,628 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=83455979-4152-4bb5-b8f1-504159a56b60
+2026-08-21 13:16:12,280 | ERROR | app.services.chat_service | chat_service.py:758 | Unexpected error in send_message_stream user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=83455979-4152-4bb5-b8f1-504159a56b60
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m481[0m, in [35msend_message_stream[0m
+    raise ValueError("Chat session not found")
+[1;35mValueError[0m: [35mChat session not found[0m
+2026-08-21 13:16:49,847 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=83455979-4152-4bb5-b8f1-504159a56b60
+2026-08-21 13:16:50,375 | ERROR | app.services.chat_service | chat_service.py:758 | Unexpected error in send_message_stream user=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=83455979-4152-4bb5-b8f1-504159a56b60
+Traceback (most recent call last):
+  File [35m"F:\sattam_ai\SattamAI\app\services\chat_service.py"[0m, line [35m481[0m, in [35msend_message_stream[0m
+    raise ValueError("Chat session not found")
+[1;35mValueError[0m: [35mChat session not found[0m
+2026-08-21 13:17:24,110 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None
+2026-08-21 13:17:29,561 | INFO | app.services.chat_history_service | chat_history_service.py:81 | Conversation built successfully for session_id=9e578904-9742-4b9e-872b-7bbabba3c34a (messages=1, tokens=1)
+2026-08-21 13:17:29,561 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=9e578904-9742-4b9e-872b-7bbabba3c34a
+2026-08-21 13:17:35,426 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:282 | Agent completed session_id=9e578904-9742-4b9e-872b-7bbabba3c34a api_calls=1
+2026-08-21 13:17:38,362 | INFO | app.services.chat_service | chat_service.py:724 | send_message_stream completed session_id=9e578904-9742-4b9e-872b-7bbabba3c34a user_id=95313963-5c0b-49f6-afcf-7a71c8b13865

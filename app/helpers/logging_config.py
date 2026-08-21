@@ -53,3 +53,25 @@ def setup_logging():
     # Reduce noisy libraries
     logging.getLogger("uvicorn.access").setLevel(logging.INFO)
     logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
+
+    # Disable noisy third-party loggers
+NOISY_LOGGERS = [
+    "sqlalchemy",
+    "sqlalchemy.engine",
+    "azure",
+    "azure.core",
+    "azure.identity",
+    "azure.core.pipeline",
+    "azure.core.pipeline.policies.http_logging_policy",
+    "openai",
+    "httpx",
+    "httpcore",
+    "urllib3",
+    "asyncio",
+]
+
+for logger_name in NOISY_LOGGERS:
+    logger = logging.getLogger(logger_name)
+    logger.handlers.clear()
+    logger.propagate = False
+    logger.setLevel(logging.CRITICAL + 1)
