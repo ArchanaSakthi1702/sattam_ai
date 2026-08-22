@@ -5447,3 +5447,4 @@ Traceback (most recent call last):
 2026-08-21 13:17:29,561 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:240 | Agent streaming loop started session_id=9e578904-9742-4b9e-872b-7bbabba3c34a
 2026-08-21 13:17:35,426 | INFO | app.services.agent_loop.agent_loop_service | agent_loop_service.py:282 | Agent completed session_id=9e578904-9742-4b9e-872b-7bbabba3c34a api_calls=1
 2026-08-21 13:17:38,362 | INFO | app.services.chat_service | chat_service.py:724 | send_message_stream completed session_id=9e578904-9742-4b9e-872b-7bbabba3c34a user_id=95313963-5c0b-49f6-afcf-7a71c8b13865
+2026-08-21 14:22:26,928 | INFO | app.services.chat_service | chat_service.py:465 | send_message_stream started user_id=95313963-5c0b-49f6-afcf-7a71c8b13865 session_id=None

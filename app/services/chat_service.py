@@ -753,6 +753,11 @@ class ChatService:
                 ),
             }
 
+        except ValueError:
+            # Expected business/validation error.
+            # Let the router convert it into an SSE error event.
+            raise
+
         except Exception as exc:
 
             logger.exception(
